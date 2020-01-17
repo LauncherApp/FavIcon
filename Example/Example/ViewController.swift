@@ -22,7 +22,7 @@ class ViewController: UIViewController {
     @IBOutlet private weak var imageView: UIImageView!
     @IBOutlet private weak var statusLabel: UILabel!
     
-    let url = "https://youtube.com"
+    let url = "https://blog.csdn.net/yixiangboy"
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,7 +30,8 @@ class ViewController: UIViewController {
         statusLabel.text = "Loading..."
         do {
             try FavIcon.downloadPreferred(url, width: 200, height: 200) { result in
-                if case let .success(image) = result {
+                if case let .success(image, url) = result {
+                    print(url)
                     self.statusLabel.text = "Loaded (\(image.size.width)x\(image.size.height))"
                     self.imageView.image = image
                 } else if case let .failure(error) = result {
